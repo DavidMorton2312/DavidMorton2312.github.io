@@ -1,0 +1,33 @@
+﻿@model ProjectWebCuoiKhoa.Models.AdminUser
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/signIn.css" />
+@using (Html.BeginForm("LoginAccount", "LoginUser", FormMethod.Post, new { @class = "wrapper" }))
+{
+    <div class="signup-box">
+        <h1> Log in </h1>
+        <form>
+
+            @Html.LabelFor(m => m.ID, new { @class = "white" })
+            @Html.TextBoxFor(m => m.ID)
+
+            @if (ViewBag.ErrorLogin != null)
+            {
+                <span style="color: red;">@ViewBag.ErrorLogin</span>
+            }
+            @Html.LabelFor(m => m.PasswordUser, new { @class = "white" })
+            @Html.TextBoxFor(m => m.PasswordUser)
+            <br />
+            <input type="submit" value="Login" class="btn">
+            <a href="#" style="font-weight:600;"> Forgot password </a>
+        </form>
+
+    </div>
+    <p class="para-2"> Don't have an account ? @Html.ActionLink("Create one here!","SignUp","LoginUser")</p>
+}
+
+

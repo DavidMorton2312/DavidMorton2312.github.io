@@ -1,0 +1,165 @@
+﻿@model IEnumerable<ProjectWebCuoiKhoa.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    var ProMax = Model.OrderBy(m => m.Price).Reverse().ElementAt(0);
+    var ProSecondMax = Model.OrderBy(m => m.Price).Reverse().ElementAt(1);
+    var ProThirdMax = Model.OrderBy(m => m.Price).Reverse().ElementAt(2);
+}
+
+<link rel="stylesheet" href="~/Content/css/index.css" />
+<link rel="stylesheet" href="~/Content/css/responsive.css" />
+<link rel="stylesheet" href="~/Scripts/AnimationChange.js" />
+<div class="slider-wrapper" id="sliderAuto">
+    <div class="">
+        <div id="slider">
+            <div class="slider__slogan">
+                <h1 class="slogan__heading">Trải nghiệm hoành tráng, sáng tạo chất riêng</h1>
+                <p class="slogan__detail">Rước ngay ưu đãi mê ly, giảm <b>50%</b> </p>
+                <button class="slogan__btn">Mua ngay</button>
+            </div>
+            <div class="slider__show">
+                <div class="slides">
+                    <input type="radio" name="r" id="radio1">
+                    <input type="radio" name="r" id="radio2">
+
+                    <input type="radio" name="r" id="radio3">
+
+                    <input type="radio" name="r" id="radio4">
+
+                    <div class="slide first">
+                        <img src="~/image/banner1.jpg" alt="" />
+                    </div>
+
+                    <div class="slide">
+                        <img src="~/image/banner2.jpg" alt="" />
+                    </div>
+
+                    <div class="slide">
+                        <img src="~/image/banner3.jpg" alt="" />
+                    </div>
+
+                    <div class="slide">
+                        <img src="~/image/banner4.jpg" alt="" />
+                    </div>
+
+                    <div class="navigation-auto">
+                        <div class="auto-btn1"></div>
+                        <div class="auto-btn2"></div>
+                        <div class="auto-btn3"></div>
+                        <div class="auto-btn4"></div>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <label for="radio1" class="bar"></label>
+                    <label for="radio2" class="bar"></label>
+                    <label for="radio3" class="bar"></label>
+                    <label for="radio4" class="bar"></label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var count = 1;
+    setInterval(function () {
+        document.getElementById('radio' + count).checked = true;
+        count++;
+        if (count > 4) {
+            count = 1;
+        }
+    }, 5000)
+</script>
+
+
+<div class="wrapperContent">
+    <div class="container blank-top">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="content__left">
+                    <ul class="content__left-list">
+                        <li class="content__left-item1">
+                            <span class="content__left-link1">GAMING</span>
+                        </li>
+                        <li class="content__left-item2">
+                            <span class="content__left-link2">WORKING</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <div class="content__right">
+                    <h2 class="content__right-heading">Sản phẩm nổi bật</h2>
+                    <div class="content__right-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="product">
+                                    <img src="@Url.Content(ProMax.ImagePro)" />
+                                    <h2 class="product__name">@ProMax.NamePro</h2>
+                                    <span class="product__price">@ProMax.Price.Value.ToString("#,##0").Replace(',', '.')</span>
+                                    <a href="/Product/DetailsCustomer/@ProMax.ProductID" class="product__btn">Buy</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="product-mini">
+                                    <img src="@Url.Content(ProSecondMax.ImagePro)">
+                                    <h2 class="product-mini__name">@ProSecondMax.NamePro</h2>
+                                    <span class="product-mini__price">@ProSecondMax.Price.Value.ToString("#,##0").Replace(',', '.')</span>
+                                    <a href="/Product/DetailsCustomer/@ProSecondMax.ProductID" class="product-mini__btn">Buy</a>
+                                </div>
+                                <div class="product-mini">
+                                    <img src="@Url.Content(ProThirdMax.ImagePro)" id="second-img">
+                                    <h2 class="product-mini__name">@ProThirdMax.NamePro</h2>
+                                    <span class="product-mini__price">@ProThirdMax.Price.Value.ToString("#,##0").Replace(',', '.')</span>
+                                    <a href="/Product/DetailsCustomer/@ProThirdMax.ProductID" class="product-mini__btn">Buy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="~/Scripts/AnimationChange.js" />
+<script src="~/Scripts/AnimationChange.js"></script>
+<div class="product-Section">
+    <div class="heading">
+        <h1 class="heading__name">Sản Phẩm</h1>
+    </div>
+    <div class="container space" id="productSection">
+        <form action="/Home/Search" method="post">
+            <div class="searchingSection">
+                <div class="search__name">
+                    <span>Tên Sản phẩm :</span>
+                    <input type="text" name="SearchString" />
+                </div>
+                <div class="search__price">
+                    <span>Đơn giá từ :</span>
+                    <input type="number" name="min" value="0" />
+                    <span>Đến :</span>
+                    <input type="number" name="max" value="0" />
+                </div>
+                <input type="submit" value="Tìm kiếm" class="btn btn-warning" />
+            </div>
+        </form>
+        <div class="row">
+            @foreach (var pro in Model.OrderBy(m => m.Price))
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="product-cate">
+                        <img src="@Url.Content(pro.ImagePro)" class="others" />
+                        <h2 class="product-cate__name">@pro.NamePro</h2>
+                        <span class="product-cate__price">@pro.Price.Value.ToString("#,##0").Replace(',', '.')</span>
+                        <a href="/Product/DetailsCustomer/@pro.ProductID" class="product-cate__btn">Buy</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

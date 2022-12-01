@@ -1,0 +1,52 @@
+﻿@model ProjectWebCuoiKhoa.Models.AdminUser
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/signUp.css" />
+@using (Html.BeginForm("SignUp", "LoginUser", FormMethod.Post, new { @class = "wrapper" }))
+{
+    <div class="signup-box">
+        <h1> Sign Up </h1>
+        <form>
+            @Html.LabelFor(m => m.NameUser, new { @class = "white" })
+            <div class="parent">
+                @Html.TextBoxFor(m => m.NameUser)
+                @Html.ValidationMessageFor(m => m.NameUser, null, new { @class = "red child" })
+            </div>
+
+            @Html.LabelFor(m => m.ID, new { @class = "white" })
+            <div class="parent">
+                @Html.TextBoxFor(m => m.ID)
+                @Html.ValidationMessageFor(m => m.ID, null, new { @class = "red child" })
+            </div>
+
+            @Html.LabelFor(m => m.EmailUser, new { @class = "white" })
+            <div class="parent">
+                @Html.TextBoxFor(m => m.EmailUser)
+                @Html.ValidationMessageFor(m => m.EmailUser, null, new { @class = "red child" })
+            </div>
+
+            @Html.LabelFor(m => m.PasswordUser, new { @class = "white" })
+            <div class="parent">
+                @Html.PasswordFor(m => m.PasswordUser)
+                @Html.ValidationMessageFor(m => m.PasswordUser, null, new { @class = "red child" })
+            </div>
+
+            @Html.LabelFor(m => m.ConfirmPass, new { @class = "white" })
+            <div class="parent">
+                @Html.PasswordFor(m => m.ConfirmPass)
+                @Html.ValidationMessageFor(m => m.ConfirmPass, null, new { @class = "red child" })
+            </div>
+
+            <br />
+            <input type="submit" value="Sign Up" class="btn">
+
+        </form>
+
+    </div>
+    <p class="para-2"> Don't have an account ? <a href="./signup.html" style="font-weight:600 ;"> Create one here !</a></p>
+}
+

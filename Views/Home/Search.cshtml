@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProjectWebCuoiKhoa.Models.Product>
+@{
+    ViewBag.Title = "Serch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/index.css" />
+<link rel="stylesheet" href="~/Content/css/responsive.css" />
+<div class="product-Section">
+    <div class="heading">
+        <h1 class="heading__name">Product</h1>
+    </div>
+
+    <div class="container space" id="productSection">
+            <form action="/Home/Search" method="post">
+                <div class="searchingSection">
+                    <div class="search__name">
+                        <span>Tên Sản phẩm :</span>
+                        <input type="text" name="SearchString" />
+                    </div>
+                    <div class="search__price">
+                        <span>Đơn giá từ :</span>
+                        <input type="number" name="min" value="0" />
+                        <span>Đến :</span>
+                        <input type="number" name="max" value="0" />
+                    </div>
+                    <input type="submit" value="Tìm kiếm" class="btn btn-warning" />
+                </div>
+            </form>
+
+        <div class="row">
+            @foreach (var pro in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="product-cate">
+                        <img src="@Url.Content(pro.ImagePro)" class="others" />
+                        <h2 class="product-cate__name">@Html.DisplayFor(m => pro.NamePro)</h2>
+                        <span class="product-cate__price">@pro.Price.Value.ToString("#,##0").Replace(',', '.')</span>
+                        <a href="/Product/Details/@pro.ProductID" class="product-cate__btn">Buy</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
